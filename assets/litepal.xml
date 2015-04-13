@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<litepal>  
+   <dbname value="big_white_weather" ></dbname>  
+ 
+    <version value="1" ></version>  
+  
+  <list>  
+       <mapping class="com.big_whiteweather.model.Province"></mapping>
+       <mapping class="com.big_whiteweather.model.City"></mapping>
+       <mapping class="com.big_whiteweather.model.Country"></mapping> 
+   </list>  
+</litepal>  

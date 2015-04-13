@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.big_whiteweaher"
+    package="com.big_whiteweather"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="20"
-        android:targetSdkVersion="20" />
+        android:minSdkVersion="14"
+        android:targetSdkVersion="14" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.big_whiteweather.activity.ChooseAreaActivity"
             android:label="@string/app_name" >
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.big_whiteweather.activity.WeatherActivity"
+            android:theme="@android:style/Theme.Holo"           
+            >
+             </activity>
+             <service android:name="com.big_whiteweather.service.AutoUpdateService"></service>
+             
+             <receiver android:name="com.big_whiteweather.receiver.AutoUpdatereceiver"></receiver>
     </application>
 
 </manifest>
