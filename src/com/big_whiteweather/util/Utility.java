@@ -60,6 +60,7 @@ public class Utility {
 		   return true;
 	   }
 	   } 
+
 	return false;	   
    }
    
@@ -124,8 +125,8 @@ private static void saveWeatherInfo(Context context, String cityName,
 	editor.putBoolean("city_selected", true);
 	editor.putString("city_name", cityName);
 	editor.putString("weather_code", weatherCode);
-	editor.putString("temp1", temp1);
-	editor.putString("temp2", temp2);
+	editor.putString("temp1", temp2);
+	editor.putString("temp2", temp1);
 	editor.putString("weather_desp", weatherDesp);
 	editor.putString("publish_time", publishTime);
 	editor.putString("current_date", sdf.format(new Date()));

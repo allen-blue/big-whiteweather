@@ -25,6 +25,8 @@ public class HttpUtil {
 					InputStream in = connection.getInputStream();
 					BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 					StringBuilder response = new StringBuilder();
+					
+					
 					String line;
 					while((line = reader.readLine())!=null){
 						response.append(line);
@@ -38,6 +40,7 @@ public class HttpUtil {
 					if(listener !=null){
 					//回调onError方法
 						listener.onError(e);
+						e.printStackTrace();
 					}
 				}
 				finally{

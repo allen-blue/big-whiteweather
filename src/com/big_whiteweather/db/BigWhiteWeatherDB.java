@@ -42,6 +42,8 @@ public class BigWhiteWeatherDB {
 	public synchronized static BigWhiteWeatherDB getInstance(Context context){
 		if(bigWhiteWeatherDB == null){
 			bigWhiteWeatherDB = new BigWhiteWeatherDB(context);
+			
+			
 		}
 		return bigWhiteWeatherDB;
 	}
