@@ -238,8 +238,6 @@ public class ChooseAreaActivity extends Activity{
 			progressDialog = new ProgressDialog(this);
 			progressDialog.setMessage("正在加载。。。。");
 			progressDialog.setCanceledOnTouchOutside(false);
-			//progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);显示进度条
-			//progressDialog.setMax(100);  
 		}
 		progressDialog.show();
 	}
@@ -249,7 +247,6 @@ public class ChooseAreaActivity extends Activity{
 	private void closeProgressDialog(){
 		if(progressDialog != null){
 			progressDialog.dismiss();
-		
 		}
 	}
 	/**

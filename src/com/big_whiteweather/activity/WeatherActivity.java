@@ -1,4 +1,5 @@
 package com.big_whiteweather.activity;
+
 import com.big_whiteweather.R;
 import com.big_whiteweather.receiver.AutoUpdateService;
 import com.big_whiteweather.util.HttpCallbackListener;
@@ -10,10 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -48,8 +46,6 @@ protected void onCreate(Bundle savedInstanceState) {
 	 super.onCreate(savedInstanceState);
 	 requestWindowFeature(Window.FEATURE_NO_TITLE);
 	 setContentView(R.layout.weather_layout);
-	// android.app.ActionBar actionBar = getActionBar();
-//	 actionBar.setDisplayHomeAsUpEnabled(true);
 	 weatherInfoLayout = (LinearLayout) this.findViewById(R.id.weather_info_layout);
 	 cityNameText = (TextView) this.findViewById(R.id.city_name);
 	 publishText = (TextView) this.findViewById(R.id.publish_text);
@@ -146,27 +142,7 @@ private void showWeather() {
 	startService(intent);
 }
 
-/**@Override
-public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.main, menu);
-	return true;
-}
 
-
-@Override
-public boolean onOptionsItemSelected(MenuItem item) {
-	
-	int id = item.getItemId();
-	if (id == R.id.home) {
-		return true;
-	}
-	if (id == R.id.refresh_weather){
-		return true;
-	}
-	return super.onOptionsItemSelected(item);
-}
-*/
 @Override
 public void onClick(View v) {
 	switch(v.getId()){

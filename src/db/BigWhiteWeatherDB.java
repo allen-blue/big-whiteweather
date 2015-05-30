@@ -1,16 +1,15 @@
-package com.big_whiteweather.db;
+package db;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.big_whiteweather.model.City;
-import com.big_whiteweather.model.Country;
-import com.big_whiteweather.model.Province;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import model.City;
+import model.Country;
+import model.Province;
 
 public class BigWhiteWeatherDB {
 	/**
@@ -29,10 +28,8 @@ public class BigWhiteWeatherDB {
 	 * 将构造方法私有化
 	 */
 	private BigWhiteWeatherDB(Context context){
-		//
-		BigWhiteWeatherOpenHelper dbHelper = new BigWhiteWeatherOpenHelper(context, DB_NAME, null, 1);
+		BigWhiteWeatherOpenHelper dbHelper = new BigWhiteWeatherOpenHelper(context, DB_NAME, null, 1, null);
 		db =dbHelper.getWritableDatabase();
-		
 		
 	}
 	
@@ -55,9 +52,6 @@ public class BigWhiteWeatherDB {
 			values.put("province_name", province.getProvinceName());
 			values.put("province_code", province.getProvinceCode());
 			db.insert("Province", null, values);
-	   // province.setProvinceName(province.getProvinceName());
-		//...
-		//    province.save();
 		}
 		
 	}
@@ -68,10 +62,10 @@ public class BigWhiteWeatherDB {
 	public List<Province> LoadProvinces(){
 		List<Province> list = new ArrayList<Province>();
 		Cursor cursor = db.query("Province", null, null, null, null, null, null);
-		if(cursor != null && cursor.moveToFirst()){
+		if(cursor.moveToFirst()){
 			do{
 				Province province = new Province();
-				province.setId(cursor.getInt(cursor.getColumnIndex("id")));
+				province.setId(cursor.getColumnIndex("id"));
 				province.setProvinceName(cursor.getString(cursor.getColumnIndex("province_name")));
 				province.setProvinceCode(cursor.getString(cursor.getColumnIndex("province_code")));
 				list.add(province);
@@ -91,7 +85,6 @@ public class BigWhiteWeatherDB {
 			ContentValues values =new ContentValues();
 			values.put("city_name", city.getCityName());
 			values.put("city_code", city.getCityCode());
-			values.put("province_id", city.getProvinceId());
 			db.insert("City", null, values);
 		}
 		
@@ -102,11 +95,11 @@ public class BigWhiteWeatherDB {
 	 */
 	public List<City> LoadCitys(int provinceId){
 		List<City> list = new ArrayList<City>();
-		Cursor cursor = db.query("City", null, "province_id = ?", new String[] {String.valueOf(provinceId)}, null, null, null);
-		if(cursor != null && cursor.moveToFirst()){
+		Cursor cursor = db.query("City", null, null, null, null, null, null);
+		if(cursor.moveToFirst()){
 			do{
 				City city = new City();
-				city.setId(cursor.getInt(cursor.getColumnIndex("id")));
+				city.setId(cursor.getColumnIndex("id"));
 				city.setCityName(cursor.getString(cursor.getColumnIndex("city_name")));
 				city.setCityCode(cursor.getString(cursor.getColumnIndex("city_code")));
 				city.setProvinceId(provinceId);
@@ -126,7 +119,6 @@ public class BigWhiteWeatherDB {
 			ContentValues values =new ContentValues();
 			values.put("country_name", country.getCountryName());
 			values.put("country_code", country.getCountryCode());
-			values.put("city_id", country.getCityId());
 			db.insert("Country", null, values);
 		}
 		
@@ -137,11 +129,11 @@ public class BigWhiteWeatherDB {
 	 */
 	public List<Country> LoadCountries(int cityId){
 		List<Country> list = new ArrayList<Country>();
-		Cursor cursor = db.query("Country", null, "city_id = ?", new String[] {String.valueOf(cityId)}, null, null, null);
-		if(cursor != null && cursor.moveToFirst()){
+		Cursor cursor = db.query("Country", null, null, null, null, null, null);
+		if(cursor.moveToFirst()){
 			do{
 				Country country = new Country();
-				country.setId(cursor.getInt(cursor.getColumnIndex("id")));
+				country.setId(cursor.getColumnIndex("id"));
 				country.setCountryName(cursor.getString(cursor.getColumnIndex("country_name")));
 				country.setCountryCode(cursor.getString(cursor.getColumnIndex("country_code")));
 				list.add(country);
