@@ -32,12 +32,16 @@ public class BigWhiteWeatherOpenHelper extends SQLiteOpenHelper{
       		+ "country_name text, "
        		+ "country_code text, "
        		+ "city_id integer)";
+     
+     
 	public BigWhiteWeatherOpenHelper(Context context, String name,
 			CursorFactory factory, int version
 			) {
 		super(context, name, factory, version);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 	db.execSQL(CREATE_PROVINCE);//´´½¨Province±í
