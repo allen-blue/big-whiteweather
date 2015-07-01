@@ -1,6 +1,6 @@
-package com.big_whiteweather.service;
+package com.big_whiteweather.receiver;
 
-import com.big_whiteweather.receiver.AutoUpdateService;
+import com.big_whiteweather.service.AutoUpdateService;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

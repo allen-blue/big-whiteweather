@@ -1,8 +1,13 @@
 package com.big_whiteweather.activity;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.big_whiteweather.R;
-import com.big_whiteweather.receiver.AutoUpdateService;
+import com.big_whiteweather.service.AutoUpdateService;
 import com.big_whiteweather.util.HttpCallbackListener;
 import com.big_whiteweather.util.HttpUtil;
+import com.big_whiteweather.util.MyApplication;
 import com.big_whiteweather.util.Utility;
 
 import android.app.Activity;
@@ -89,7 +94,47 @@ private  void queryWeatherInfo(String weatherCode){
 }
 
 private void queryFromServer(final String address, final String type) {
-	HttpUtil.SendHttpRequest(address, new HttpCallbackListener() {
+	RequestQueue mQueue = MyApplication.getRequestQueue();
+	StringRequest stringRequest = new StringRequest(address, new Response.Listener<String>() {
+
+		@Override
+		public void onResponse(String response) {
+			if("countryCode".equals(type)){
+				if(!TextUtils.isEmpty(response)){
+					//从服务器返回的数据中解析到出天气代码
+					String[] array = response.split("\\|");
+					if(array !=null && array.length ==2){
+						String weatherCode = array[1];
+						queryWeatherInfo(weatherCode);
+					}
+				}
+			}else if("weatherCode".equals(type)){
+				//处理服务器返回的天气信息
+				Utility.handleWeatherResponse(WeatherActivity.this, response);
+				showWeather();
+				/*runOnUiThread(new  Runnable() {
+					@Override
+					public void run() {
+						showWeather();
+					}
+				});*/
+			}
+			
+		}
+	}, new Response.ErrorListener() {
+
+		@Override
+		public void onErrorResponse(VolleyError error) {
+			runOnUiThread(new  Runnable() {
+				public void run() {
+					publishText.setText("同步失败");
+				}
+			});
+			
+		}
+	});
+	mQueue.add(stringRequest);
+	/*HttpUtil.SendHttpRequest(address, new HttpCallbackListener() {
 		
 		@Override
 		public void onFinish(final String response) {
@@ -124,7 +169,7 @@ private void queryFromServer(final String address, final String type) {
 		});
 			
 		}
-	});
+	});*/
 	
 }
 
